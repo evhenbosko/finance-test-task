@@ -1,0 +1,31 @@
+.field{
+  display: grid;
+  grid-template-areas: 
+  "ticker exchange price change change_percent last_trade_time dividend yield";
+  justify-content: space-between;
+}
+.ticker{
+  grid-area: ticker;
+  min-width: 50px;
+}
+.price{
+  grid-area:  price;
+}
+.change{
+  grid-area: change;
+}
+.exchange{
+  grid-area: exchange;
+}
+.change_price{
+  grid-area: change_price;
+}
+.last_trade_time{
+  grid-area: last_trade_time;
+}
+.dividend{
+  grid-area: dividend;
+}
+.yield{
+  grid-area: yield;
+}
