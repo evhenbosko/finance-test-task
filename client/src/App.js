@@ -1,7 +1,7 @@
 
 import './App.css';
 import io from 'socket.io-client'
-import React,{useState} from 'react';
+import React,{useEffect, useState} from 'react';
 import Ticker from './components/ticker/ticker';
 import { useDispatch, useSelector } from 'react-redux';
 function App() {
@@ -11,20 +11,20 @@ function App() {
  let socket = null;
  let [vals,setVals]=useState(tickers)
 
-
-const update=()=>{ 
-  socket = io.connect('http://localhost:4000');
-  socket.emit('start')
-  console.log('connected');
-  socket.on('ticker', (data) => {
-      setVals(data);
-      console.log(data);
-      click()
+    useEffect(()=>{
+     socket = io.connect('http://localhost:4000');
+     socket.emit('start')
+     console.log('connected');
+     socket.on('ticker', (data) => {
+        setVals(data);
+        console.log(data);
 });       
-}
-  const click=()=>{ dispatch({type:"FETCH",payload:vals})}
+},[])
+
+
+  
  setInterval(() => {
-  update()
+  dispatch({type:"FETCH",payload:vals})
  }, 10000); 
 
 
@@ -46,7 +46,7 @@ tickers.map((values,index)=>{
   }
   <Ticker/>
 
- <button onClick={click}/>
+ <button/>
 </div>
   );
 }
